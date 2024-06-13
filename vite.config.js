@@ -8,5 +8,26 @@ export default defineConfig({
   plugins: [preact(), svelte(), svelteTesting()],
   test: {
     environment: 'jsdom',
+    deps: {
+      optimizer: {
+        web: {
+          enabled: true,
+          include: ['@testing-library/preact'],
+        },
+      },
+    },
+    /*
+    alias: [
+      // https://vitest.dev/config/#alias
+      // This is passed to @rollup/plugin-alias as the "entries" field
+      // https://github.com/rollup/plugins/tree/master/packages/alias#entries
+      // In Vitest, force loading of Svelte's browser build so that lifecycle methods are called.
+      // https://github.com/testing-library/svelte-testing-library/issues/222#issuecomment-1909993331
+      {
+        find: /^svelte$/,
+        replacement: join(currentDir, 'node_modules/svelte/src/runtime/'),
+      },
+    ],
+    */
   },
 });
